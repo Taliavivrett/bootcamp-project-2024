@@ -19,7 +19,6 @@ var blogs = [
 
 function appendingBlog() {
     var blogContainer = document.getElementById('blog-container');
-
     if (blogContainer) { // make sure we only do this to blogs
         blogs.forEach(function (blog) {
             var blogPost = document.createElement('div'); // make div
