@@ -1,20 +1,18 @@
-// Blog interface
-interface Blog {
+type Blog = {
   title: string;
   date: string;
   description: string;
   image: string;
   imageALT: string;
-  slug: string;
+  slug: string
 }
 
-// Array
 const blogs: Blog[] = [
 {
   title: "Travel",
   date: "Summer 2024",
   description: "Places I've been this past summer",
-  image: "../Camping.jpg", 
+  image: "Camping.jpg",
   imageALT: "Picture of a forest",
   slug: "travel-summer-2024",
 },
@@ -22,61 +20,44 @@ const blogs: Blog[] = [
   title: "Food",
   date: "Summer 2024",
   description: "My favorite meals that I've eaten/cooked this past summer",
-  image: "../Food.jpg", 
+  image: "Food.jpg",
   imageALT: "Picture of a meal I made",
   slug: "food-summer-2024",
 },
 ];
 
-// Function to display blogs on the page
-function displayBlogs() {
-  // Access the blog container element by its ID
+function appendingBlog(){
   const blogContainer = document.getElementById('blog-container');
 
-  if (blogContainer) {
-    // Iterate through the list of blogs
-    blogs.forEach((blog) => {
-      // Create the main container div for each blog
-      const blogDiv = document.createElement('div');
-      blogDiv.classList.add('blog-post');
+  if (blogContainer){             // make sure we only do this to blogs
+      blogs.forEach(blog => {
+          const blogPost = document.createElement('div');          //make div
+          blogPost.className ='blog-post';                     // enable styling
 
-      // Create an h1 element for the blog title
-      const title = document.createElement('h1');
-      title.innerText = blog.title;
+          const title = document.createElement('h1');      //make title
+          title.textContent = blog.title;                  //^
+          const titleLink = document.createElement('a');
+          titleLink.href = `${blog.slug}.html`;
+          titleLink.appendChild(title);
 
-      // Create a p element for the blog date
-      const date = document.createElement('p');
-      date.classList.add('blog-date');
-      date.innerText = blog.date;
+          const date = document.createElement('p');
+          date.textContent = `Date Posted: ${blog.date}`;
 
-      // Create a p element for the blog description
-      const description = document.createElement('p');
-      description.classList.add('blog-description');
-      description.innerText = blog.description;
+          const image = document.createElement('img');       //Deal with images
+          image.src = blog.image;                            // ^
+          image.alt = blog.imageALT;                         // Alt images
 
-      // Create an img element for the blog image
-      const img = document.createElement('img');
-      img.src = blog.image;
-      img.alt = blog.imageALT;
-      img.classList.add('blog-image');
+          const description = document.createElement('p'); // p for description
+          description.textContent = blog.description;      // ^
 
-      // Create a link (a) element to navigate to the full blog post page
-      const link = document.createElement('a');
-      link.href = `blogs/${blog.slug}.html`;
-      link.innerText = "Read more";
+          blogPost.appendChild(titleLink);                      // append everything to blogDiv
+          blogPost.appendChild(date);
+          blogPost.appendChild(image);
+          blogPost.appendChild(description);
 
-      // Append the created elements to the blogDiv
-      blogDiv.appendChild(title);
-      blogDiv.appendChild(date);
-      blogDiv.appendChild(description);
-      blogDiv.appendChild(img);
-      blogDiv.appendChild(link);
-
-      // Finally, append the blogDiv to the blog container
-      blogContainer.appendChild(blogDiv);
-    });
+          blogContainer.appendChild(blogPost);                     // append blogDiv to cont
+      });
   }
 }
 
-// Call the function to display blogs when the page loads
-displayBlogs();
+appendingBlog();
