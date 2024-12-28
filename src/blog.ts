@@ -28,46 +28,55 @@ const blogs: Blog[] = [
 },
 ];
 
-// Function to append blog posts to the webpage
-function appendBlogs() {
-const blogContainer = document.getElementById('blog-container'); // Find the container where blogs will be displayed
-if (blogContainer) {
-  blogs.forEach((blog) => {
-    // Create the elements for each blog post
-    const blogPost = document.createElement('div');
-    blogPost.className = 'blog-post';
+// Function to display blogs on the page
+function displayBlogs() {
+  // Access the blog container element by its ID
+  const blogContainer = document.getElementById('blog-container');
 
-    const title = document.createElement('h1');
-    title.textContent = blog.title;
-    const titleLink = document.createElement('a');
-    titleLink.href = `${blog.slug}.html`;
-    titleLink.appendChild(title);
+  if (blogContainer) {
+    // Iterate through the list of blogs
+    blogs.forEach((blog) => {
+      // Create the main container div for each blog
+      const blogDiv = document.createElement('div');
+      blogDiv.classList.add('blog-post');
 
-    const date = document.createElement('p');
-    date.textContent = `Date Posted: ${blog.date}`;
+      // Create an h1 element for the blog title
+      const title = document.createElement('h1');
+      title.innerText = blog.title;
 
-    const image = document.createElement('img');
-    image.src = blog.image;
-    image.alt = blog.imageALT;
+      // Create a p element for the blog date
+      const date = document.createElement('p');
+      date.classList.add('blog-date');
+      date.innerText = blog.date;
 
-    const description = document.createElement('p');
-    description.textContent = blog.description;
+      // Create a p element for the blog description
+      const description = document.createElement('p');
+      description.classList.add('blog-description');
+      description.innerText = blog.description;
 
-    // Append elements to the blogPost div
-    blogPost.appendChild(titleLink);
-    blogPost.appendChild(date);
-    blogPost.appendChild(description);
-    blogPost.appendChild(image);
+      // Create an img element for the blog image
+      const img = document.createElement('img');
+      img.src = blog.image;
+      img.alt = blog.imageALT;
+      img.classList.add('blog-image');
 
-    // Append the blogPost div to the blogContainer
-    blogContainer.appendChild(blogPost);
-  });
+      // Create a link (a) element to navigate to the full blog post page
+      const link = document.createElement('a');
+      link.href = `blogs/${blog.slug}.html`;
+      link.innerText = "Read more";
+
+      // Append the created elements to the blogDiv
+      blogDiv.appendChild(title);
+      blogDiv.appendChild(date);
+      blogDiv.appendChild(description);
+      blogDiv.appendChild(img);
+      blogDiv.appendChild(link);
+
+      // Finally, append the blogDiv to the blog container
+      blogContainer.appendChild(blogDiv);
+    });
+  }
 }
-}
 
-// Call the function to append the blogs
-appendBlogs();
-
-// Export blogs (optional if you need to use the data in other files)
-export default blogs;
-
+// Call the function to display blogs when the page loads
+displayBlogs();
