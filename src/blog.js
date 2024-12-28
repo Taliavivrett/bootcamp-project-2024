@@ -1,3 +1,5 @@
+// blog.js
+
 var blogs = [
     {
         title: "Travel",
@@ -19,35 +21,39 @@ var blogs = [
 
 function appendingBlog() {
     var blogContainer = document.getElementById('blog-container');
-    if (blogContainer) { // make sure we only do this to blogs
+    if (blogContainer) {
         blogs.forEach(function (blog) {
-            var blogPost = document.createElement('div'); // make div
-            blogPost.className = 'blog-post'; // enable styling
+            var blogPost = document.createElement('div'); // Create div for each post
+            blogPost.className = 'blog-post'; // Add class for styling
 
-            var title = document.createElement('h1'); // make title
-            title.textContent = blog.title; // ^
+            // Create and append title
+            var title = document.createElement('h1');
             var titleLink = document.createElement('a');
-            titleLink.href = blog.slug + '.html';
-            titleLink.appendChild(title);
+            titleLink.href = blog.slug + '.html'; // Link to individual blog
+            titleLink.textContent = blog.title;
+            title.appendChild(titleLink);
 
+            // Create and append date
             var date = document.createElement('p');
             date.textContent = 'Date Posted: ' + blog.date;
 
-            var image = document.createElement('img'); // Deal with images
-            image.src = blog.image; // ^
-            image.alt = blog.imageALT; // Alt images
+            // Create and append image
+            var image = document.createElement('img');
+            image.src = blog.image;
+            image.alt = blog.imageALT;
 
-            var description = document.createElement('p'); // p for description
-            description.textContent = blog.description; // ^
+            // Create and append description
+            var description = document.createElement('p');
+            description.textContent = blog.description;
 
-            blogPost.appendChild(titleLink); // append everything to blogDiv
+            // Append everything to the blog post div
+            blogPost.appendChild(title);
             blogPost.appendChild(date);
             blogPost.appendChild(description);
             blogPost.appendChild(image);
-            blogPost.appendChild(imageALT);
-            blogPost.appendChild(slug);
 
-            blogContainer.appendChild(blogPost); // append blogDiv to cont
+            // Append the entire blog post to the main container
+            blogContainer.appendChild(blogPost);
         });
     }
 }
