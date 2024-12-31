@@ -1,0 +1,82 @@
+.resume-page {
+    background-color: white;
+    padding: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .section-title h2 {
+    border-bottom: 2px solid #6A105E;
+    padding-bottom: 5px;
+    color: #6A105E;
+    font-size: 24px;
+  }
+  
+  .entry-title {
+    color: #6A105E;
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .entry-info {
+    font-size: 16px;
+    color: #555;
+  }
+ 
+  .skill-list, .course-list {
+    padding-left: 20px;
+    list-style: disc;
+    margin-top: 10px;
+  }
+  
+  .skill-list li, .course-list li {
+    font-size: 16px;
+    color: #333;
+  }
+ 
+  .resume-page a[href$=".pdf"] {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #6A105E;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .resume-page a[href$=".pdf"]:hover {
+    background-color: #E45AB4;
+  }
+  
+  .education-section .entry-title {
+    font-size: 22px;
+    font-weight: bold;
+  }
+  
+  .education-section .entry-info {
+    color: #555;
+    font-size: 16px;
+  }
+  
+  .experience-section .entry-title {
+    font-size: 22px;
+    font-weight: bold;
+  }
+  
+  .experience-section .entry-info {
+    color: #555;
+    font-size: 16px;
+  }
+  
+  .projects-section .entry-title {
+    font-size: 22px;
+    font-weight: bold;
+  }
+  
+  .projects-section .entry-info {
+    color: #555;
+    font-size: 16px;
+  }
+
