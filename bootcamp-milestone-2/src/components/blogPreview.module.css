@@ -1,0 +1,52 @@
+.blogPreviewContainer {
+    background-color: white;
+    padding: 12px;
+    margin: 15px auto;
+    border: 1px solid rgb(106, 16, 94);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+    max-width: 280px;
+    overflow: hidden;
+    position: relative;
+    display: block;
+    text-decoration: none; 
+}
+
+.blogPreviewTitle {
+    color: rgb(106, 16, 94);
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    margin-bottom: 8px;
+}
+
+.blogPreviewImage {
+    max-width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin: 8px 0;
+}
+
+.blogPreviewDescription {
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: rgb(51, 51, 51);
+    margin: 8px 0;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+.blogPreviewDate {
+    font-size: 0.75rem;
+    color: rgb(120, 120, 120);
+    margin-top: 4px;
+    margin-bottom: 0;
+    text-align: left;
+}
+
+  

@@ -1,7 +1,9 @@
-import styles from "./page.module.css"; 
+import styles from "./page.module.css";
+import BlogPreview from '@/components/blogPreview';
+import blogs from '@/app/blogData'; 
+import Image from 'next/image';
 
 export default async function HomePage() {
-
   return (
     <>
       <main>
@@ -9,13 +11,13 @@ export default async function HomePage() {
         <h1 className={styles["page-title"]}>About Me</h1>
         <div className={styles.about}>
           <div className={styles["about-image"]}>
-            <img src="/misha.jpg" alt="the cutest cat ever" />
+          <Image src="/misha.jpg" alt="the cutest cat ever" width={500} height={500} />
           </div>
           <div className={styles["about-image"]}>
-            <img src="/headshot.jpg" alt="picture of myself" />
+          <Image src="/headshot.jpg" alt="picture of me" width={500} height={500} />
           </div>
           <div className={styles["about-image"]}>
-            <img src="/calpoly.jpg" alt="picture of Cal Poly campus" />
+          <Image src="/calpoly.jpg" alt="picture of Cal Poly campus" width={500} height={500} />
           </div>
           <div className={styles["about-text"]}>
             <p>
@@ -27,6 +29,22 @@ export default async function HomePage() {
             </p>
           </div>
         </div>
+
+        {/* Blog Preview Section */}
+        <h2 className={styles["blog-title"]}>Blog</h2>
+        <div className={styles.blogs}>
+          {blogs.map(blog => (
+            <BlogPreview 
+              key={blog.slug} 
+              title={blog.title}
+              date={blog.date}
+              description={blog.description}
+              image={blog.image}
+              imageALT={blog.imageALT}
+              slug={blog.slug}
+            />
+          ))}
+        </div>
       </main>
 
       <footer className={styles.footer}>
@@ -35,4 +53,5 @@ export default async function HomePage() {
     </>
   );
 }
+
 
