@@ -46,10 +46,6 @@ export default async function HomePage() {
           ))}
         </div>
       </main>
-
-      <footer className={styles.footer}>
-        <p>2024 &lt;Talia Vivrett&gt; | All Rights Reserved</p>
-      </footer>
     </>
   );
 }
