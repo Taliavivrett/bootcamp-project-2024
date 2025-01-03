@@ -1,6 +1,6 @@
 import styles from "./page.module.css";
-import BlogPreview from '@/components/blogPreview';
-import blogs from '@/app/blogData'; 
+import BlogPreview from '@/components/blogPreview'; // BlogPreview component
+import blogs from '@/app/blogData'; // Blog data
 import Image from 'next/image';
 
 export default async function HomePage() {
@@ -11,13 +11,13 @@ export default async function HomePage() {
         <h1 className={styles["page-title"]}>About Me</h1>
         <div className={styles.about}>
           <div className={styles["about-image"]}>
-          <Image src="/misha.jpg" alt="the cutest cat ever" width={500} height={500} />
+            <Image src="/misha.jpg" alt="the cutest cat ever" width={500} height={500} />
           </div>
           <div className={styles["about-image"]}>
-          <Image src="/headshot.jpg" alt="picture of me" width={500} height={500} />
+            <Image src="/headshot.jpg" alt="picture of me" width={500} height={500} />
           </div>
           <div className={styles["about-image"]}>
-          <Image src="/calpoly.jpg" alt="picture of Cal Poly campus" width={500} height={500} />
+            <Image src="/calpoly.jpg" alt="picture of Cal Poly campus" width={500} height={500} />
           </div>
           <div className={styles["about-text"]}>
             <p>
@@ -34,20 +34,24 @@ export default async function HomePage() {
         <h2 className={styles["blog-title"]}>Blog</h2>
         <div className={styles.blogs}>
           {blogs.map(blog => (
-            <BlogPreview 
-              key={blog.slug} 
-              title={blog.title}
-              date={blog.date}
-              description={blog.description}
-              image={blog.image}
-              imageALT={blog.imageALT}
-              slug={blog.slug}
-            />
+            <div key={blog.slug} className={styles.blogPreviewContainer}>
+              <BlogPreview 
+                title={blog.title}
+                date={blog.date}
+                description={blog.description}
+                image={blog.image}
+                imageALT={blog.imageALT}
+                slug={blog.slug}
+              />
+            </div>
           ))}
         </div>
       </main>
     </>
   );
 }
+
+
+
 
 
