@@ -17,6 +17,14 @@ export default async function HomePage() {
   }
 
   const blogs = await getBlogs();
+  // Format the date for each blog before passing it to BlogPreview
+  const formatDate = (date: Date) => {
+    return new Date(date).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  };
 
   return (
     <>
@@ -52,7 +60,7 @@ export default async function HomePage() {
               <div key={blog._id} className={styles.blogPreviewContainer}>
                 <BlogPreview
                   title={blog.title}
-                  date={blog.date}
+                  date={formatDate(blog.date)}
                   description={blog.description}
                   image={blog.image}
                   imageALT={blog.imageALT}
@@ -67,8 +75,6 @@ export default async function HomePage() {
       </main>
     </>
   );
-
-
 }
 
 

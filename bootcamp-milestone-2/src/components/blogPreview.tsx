@@ -13,7 +13,7 @@ export default function BlogPreview(props: Blog) {
           <Image 
             className={style.blogPreviewImage}
             src={props.image} 
-            alt={props.imageALT} 
+            alt={props.imageALT || 'Blog image'} 
             width={500} 
             height={500} 
           />

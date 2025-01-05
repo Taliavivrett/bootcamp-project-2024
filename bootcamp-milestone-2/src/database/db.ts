@@ -1,6 +1,9 @@
 // db.ts
 import mongoose from "mongoose";
 
+console.log("All env variables:", process.env);
+console.log("MONGO_URI:", process.env.MONGO_URI);
+
 const url: string = process.env.MONGO_URI as string;
 let connection: typeof mongoose;
 
