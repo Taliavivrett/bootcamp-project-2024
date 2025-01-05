@@ -1,9 +1,23 @@
 import styles from "./page.module.css";
 import BlogPreview from '@/components/blogPreview'; // BlogPreview component
-import blogs from '@/app/blogData'; // Blog data
+import connectDB from '@/database/db'; // Database connection
+import Blog from '@/database/blogSchema'; // Blog model
 import Image from 'next/image';
 
 export default async function HomePage() {
+  async function getBlogs() {
+    await connectDB();
+    try {
+      const blogs = await Blog.find().sort({ date: -1 }).orFail();
+      return blogs;
+    } catch (err) {
+      console.error('Failed to fetch blogs:', err);
+      return null;
+    }
+  }
+
+  const blogs = await getBlogs();
+
   return (
     <>
       <main>
@@ -33,23 +47,30 @@ export default async function HomePage() {
         {/* Blog Preview Section */}
         <h2 className={styles["blog-title"]}>Blog</h2>
         <div className={styles.blogs}>
-          {blogs.map(blog => (
-            <div key={blog.slug} className={styles.blogPreviewContainer}>
-              <BlogPreview 
-                title={blog.title}
-                date={blog.date}
-                description={blog.description}
-                image={blog.image}
-                imageALT={blog.imageALT}
-                slug={blog.slug}
-              />
-            </div>
-          ))}
+          {blogs ? (
+            blogs.map(blog => (
+              <div key={blog._id} className={styles.blogPreviewContainer}>
+                <BlogPreview
+                  title={blog.title}
+                  date={blog.date}
+                  description={blog.description}
+                  image={blog.image}
+                  imageALT={blog.imageALT}
+                  slug={blog.slug}
+                />
+              </div>
+            ))
+          ) : (
+            <p>No blogs available right now. Please check back later!</p>
+          )}
         </div>
       </main>
     </>
   );
+
+
 }
+
 
 
 
