@@ -27,7 +27,7 @@ export default async function PortfolioPage() {
           {projects ? (
             projects.map((project: any) => (
               <div key={project._id} className={styles.project}>
-                <a href={project.link} target="_blank" rel="noopener noreferrer">
+                <a href="/" target="_self">
                 <Image
                 src={project.image}
                 alt={project.imageALT || "Project image"}
