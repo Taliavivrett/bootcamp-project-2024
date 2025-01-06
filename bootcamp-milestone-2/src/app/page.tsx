@@ -69,12 +69,14 @@ export default async function HomePage() {
               </div>
             ))
           ) : (
-            <p>No blogs available right now. Please check back later!</p>
+            <p>No blogs available.</p>
           )}
         </div>
       </main>
     </>
   );
+
+
 }
 
 

@@ -1,0 +1,33 @@
+.blogPost {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.title {
+  font-size: 2rem;
+  color: rgb(106, 16, 94);
+  margin-bottom: 10px;
+}
+
+.date {
+  color: rgb(120, 120, 120);
+  margin-bottom: 20px;
+}
+
+.image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 20px 0;
+}
+
+.description {
+  line-height: 1.6;
+  font-size: 1.1rem;
+}
+
+
+
+
+  
