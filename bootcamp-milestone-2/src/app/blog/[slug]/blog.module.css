@@ -27,6 +27,30 @@
   font-size: 1.1rem;
 }
 
+.comment {
+  margin: 20px 0;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.comment h4 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: rgb(106, 16, 94);
+}
+
+.comment p {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: rgb(34, 34, 34);
+}
+
+.comment span {
+  font-size: 0.9rem;
+  color: rgb(120, 120, 120);
+}
+
+
 
 
 

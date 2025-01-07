@@ -65,6 +65,7 @@ export default async function HomePage() {
                   image={blog.image}
                   imageALT={blog.imageALT}
                   slug={blog.slug}
+                  comments={blog.comments}
                 />
               </div>
             ))
@@ -75,8 +76,6 @@ export default async function HomePage() {
       </main>
     </>
   );
-
-
 }
 
 
