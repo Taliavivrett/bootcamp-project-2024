@@ -1,6 +1,6 @@
 import ReactMarkdown from 'react-markdown';
 import styles from './blog.module.css';
-import Comment from './comment'; 
+import Comment from '../../../components/comment'; 
 import { IComment } from '../../blogData';
 
 type Props = {
