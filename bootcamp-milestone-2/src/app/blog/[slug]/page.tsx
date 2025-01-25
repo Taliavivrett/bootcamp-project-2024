@@ -1,14 +1,15 @@
 import ReactMarkdown from 'react-markdown';
 import styles from './blog.module.css';
 import Comment from '../../../components/comment'; 
+import CommentForm from '../../../components/commentForm'; // Make sure to import the CommentForm
 import { IComment } from '../../blogData';
 
 type Props = {
-  params: { slug: string }
-}
+  params: { slug: string };
+};
 
 export default async function Blog({ params }: Props) {
-  const { slug } = await params; 
+  const { slug } = await params;
   const blog = await getBlog(slug);
 
   if (!blog) {
@@ -29,6 +30,12 @@ export default async function Blog({ params }: Props) {
       <p className={styles.description}>{blog.description}</p>
       <div className={styles.blogContent}>
         <ReactMarkdown>{blog.content}</ReactMarkdown>
+      </div>
+
+      {/* Comment Form */}
+      <div className={styles.commentFormSection}>
+        <h3>Leave a Comment:</h3>
+        <CommentForm slug={slug} />
       </div>
 
       <div className={styles.commentsSection}>
@@ -61,6 +68,7 @@ async function getBlog(slug: string) {
     return null;
   }
 }
+
 
 
 

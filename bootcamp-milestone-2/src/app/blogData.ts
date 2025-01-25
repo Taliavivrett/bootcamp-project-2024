@@ -1,51 +1,63 @@
-// Comment interface
+import { NextRequest, NextResponse } from "next/server";
+import connectDB from "@/database/db";  // Importing DB connection
+import Blog from "@/database/blogSchema";  // Importing the Blog model
+
 export interface IComment {
   user: string;
   comment: string;
-  time: Date;
+  time: Date; 
 }
 
-// Blog interface
-export interface Blog {
-  title: string;
-  date: string;
-  description: string;
-  image: string;
-  imageALT: string;
-  slug: string;
-  comments: IComment[];
+type IParams = {
+  params: {
+    slug: string;  
+  };
+};
+
+export async function POST(req: NextRequest, { params }: IParams) {
+  // Connect to MongoDB
+  await connectDB();
+  
+  // Extract the blogSlug from params (from the URL)
+  const { slug } = params;
+
+  try {
+    // Parse the incoming request body
+    const body = await req.json();
+    const { user, comment, time } = body;
+
+    // Validate the request body
+    if (!user || !comment || !time) {
+      return NextResponse.json(
+        { error: "Invalid request. Missing required fields." },
+        { status: 400 }
+      );
+    }
+
+    // Find the blog post by slug
+    const blog = await Blog.findOne({ slug });
+    if (!blog) {
+      return NextResponse.json({ error: "Blog not found." }, { status: 404 });
+    }
+
+    // Create a new comment object
+    const newComment = { user, comment, time: new Date(time) };
+
+    // Add the comment to the blog's comments array
+    blog.comments.push(newComment);
+
+    // Save the updated blog with the new comment
+    await blog.save();
+
+    // Return the updated blog with the added comment
+    return NextResponse.json(blog);
+  } catch (err) {
+    // Log the error and return a server error response
+    console.error("Error adding comment:", err);
+    return NextResponse.json(
+      { error: "An error occurred while adding the comment." },
+      { status: 500 }
+    );
+  }
 }
 
-
-const blogs: Blog[] = [
-  {
-    title: "Travel",
-    date: "Summer 2024",
-    description: "Places I've been this past summer",
-    image: "/Camping.jpg",
-    imageALT: "Picture of a forest",
-    slug: "travel-summer-2024",
-    comments: [{
-      "user": "Talia Vivrett",
-      "comment": "Fun camping trip",
-      "time": new Date("2025-01-06T12:00:00Z")
-    }
-  ]
-  },
-  {
-    title: "Food",
-    date: "Summer 2024",
-    description: "My favorite meals that I've eaten/cooked this past summer",
-    image: "/Food.jpg",
-    imageALT: "Picture of a meal I made",
-    slug: "food-summer-2024",
-    comments:     [{
-      "user": "Tara Vivrett",
-      "comment": "So yummy",
-      "time": new Date("2025-01-06T13:00:00Z")
-    }
-  ]
-  },
-];
-
-export default blogs;
