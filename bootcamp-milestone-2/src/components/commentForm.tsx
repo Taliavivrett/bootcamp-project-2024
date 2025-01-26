@@ -21,8 +21,10 @@ const CommentForm = ({ slug }: { slug: string }) => {
 
     const time = new Date().toISOString();
 
+    const baseURL = 'https://bootcamp-project-2024-7v6au447d-talia-vivretts-projects.vercel.app';
+
     try {
-      const response = await fetch(`/api/Blogs/${slug}`, {  // The slug is now passed as part of the URL
+      const response = await fetch(`${baseURL}/api/Blogs/${slug}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
