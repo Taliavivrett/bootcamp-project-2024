@@ -22,8 +22,7 @@ const CommentForm = ({ slug }: { slug: string }) => {
     const time = new Date().toISOString();
 
     try {
-      // Corrected URL to include slug
-      const response = await fetch(`/api/Blogs/${slug}`, {
+      const response = await fetch(`/api/Blogs/${slug}`, {  // The slug is now passed as part of the URL
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -76,6 +75,8 @@ const CommentForm = ({ slug }: { slug: string }) => {
 };
 
 export default CommentForm;
+
+
 
 
 

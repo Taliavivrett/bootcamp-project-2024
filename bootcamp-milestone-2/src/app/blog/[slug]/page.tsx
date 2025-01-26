@@ -1,7 +1,7 @@
 import ReactMarkdown from 'react-markdown';
 import styles from './blog.module.css';
-import Comment from '../../../components/comment'; 
-import CommentForm from '../../../components/commentForm'; // Make sure to import the CommentForm
+import Comment from '../../../components/comment';
+import CommentForm from '../../../components/commentForm';
 import { IComment } from '../../blogData';
 
 type Props = {
@@ -20,19 +20,18 @@ export default async function Blog({ params }: Props) {
     <article className={styles.blogPost}>
       <h1 className={styles.title}>{blog.title}</h1>
       <p className={styles.date}>{new Date(blog.date).toLocaleDateString()}</p>
-      <img 
-        className={styles.image} 
-        src={blog.image} 
-        alt={blog.imageALT} 
-        width={800} 
-        height={400} 
+      <img
+        className={styles.image}
+        src={blog.image}
+        alt={blog.imageALT}
+        width={800}
+        height={400}
       />
       <p className={styles.description}>{blog.description}</p>
       <div className={styles.blogContent}>
         <ReactMarkdown>{blog.content}</ReactMarkdown>
       </div>
 
-      {/* Comment Form */}
       <div className={styles.commentFormSection}>
         <h3>Leave a Comment:</h3>
         <CommentForm slug={slug} />
@@ -68,6 +67,7 @@ async function getBlog(slug: string) {
     return null;
   }
 }
+
 
 
 

@@ -11,7 +11,7 @@ type IParams = {
 // GET method to fetch a blog
 export async function GET(req: NextRequest, { params }: IParams) {
   await connectDB();
-  const { slug } = params;
+  const { slug } = params;  // Get the slug from the URL params
   console.log(`Fetching blog with slug: ${slug}`);
 
   try {
@@ -24,15 +24,17 @@ export async function GET(req: NextRequest, { params }: IParams) {
 }
 
 // POST method to add a comment to a blog
-export async function POST(req: NextRequest) {
+export async function POST(req: NextRequest, { params }: IParams) {
   await connectDB();
 
+  const { slug } = params;  // Get the slug from the URL params
+  console.log("Received slug:", slug);
+
   try {
-    const { slug, user, comment, time } = await req.json();
+    const { user, comment, time } = await req.json();
 
     console.log("Received comment data:", { slug, user, comment, time });
 
-    // check data
     if (!slug || !user || !comment || !time) {
       return NextResponse.json(
         { error: "Invalid request. Missing required fields." },
@@ -40,16 +42,12 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // find blog by slug
     const blog = await blogSchema.findOne({ slug }).orFail();
 
-    // create comment
     const newComment = { user, comment, time: new Date(time) };
 
-    // add the comment to blog
     blog.comments.push(newComment);
 
-    // save with new comment
     await blog.save();
 
     console.log("Comment added successfully:", newComment);
