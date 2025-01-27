@@ -2,16 +2,10 @@ import { NextRequest, NextResponse } from 'next/server';
 import connectDB from "@/database/db";
 import blogSchema from "@/database/blogSchema";
 
-type Props = {
-  params: {
-    slug: string
-  }
-}
-
 // GET method to fetch a blog by slug
 export async function GET(
   request: NextRequest,
-  { params }: Props
+  { params }: { params: { slug: string } }
 ) {
   await connectDB();
   const { slug } = params;
@@ -29,7 +23,7 @@ export async function GET(
 // POST method to add a comment to a blog
 export async function POST(
   request: NextRequest,
-  { params }: Props
+  { params }: { params: { slug: string } }
 ) {
   await connectDB();
   const { slug } = params;
@@ -61,6 +55,5 @@ export async function POST(
     );
   }
 }
-
 
 
