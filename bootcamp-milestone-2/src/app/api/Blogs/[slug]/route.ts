@@ -2,13 +2,19 @@ import { NextRequest, NextResponse } from 'next/server';
 import connectDB from "@/database/db";
 import blogSchema from "@/database/blogSchema";
 
+type Props = {
+  params: {
+    slug: string
+  }
+}
+
 // GET method to fetch a blog by slug
 export async function GET(
-  req: NextRequest,
-  context: { params: { slug: string } }
+  request: NextRequest,
+  { params }: Props
 ) {
   await connectDB();
-  const { slug } = context.params;
+  const { slug } = params;
   console.log(`Fetching blog with slug: ${slug}`);
 
   try {
@@ -22,15 +28,15 @@ export async function GET(
 
 // POST method to add a comment to a blog
 export async function POST(
-  req: NextRequest,
-  context: { params: { slug: string } }
+  request: NextRequest,
+  { params }: Props
 ) {
   await connectDB();
-  const { slug } = context.params;
+  const { slug } = params;
   console.log("Received slug:", slug);
 
   try {
-    const { user, comment, time } = await req.json();
+    const { user, comment, time } = await request.json();
     console.log("Received comment data:", { slug, user, comment, time });
 
     if (!slug || !user || !comment || !time) {
