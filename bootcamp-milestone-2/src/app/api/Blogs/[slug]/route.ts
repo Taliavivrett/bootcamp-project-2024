@@ -2,15 +2,14 @@ import { NextRequest, NextResponse } from 'next/server';
 import connectDB from "@/database/db";
 import blogSchema from "@/database/blogSchema";
 
-// GET method to fetch a blog by slug
-export async function GET(req: NextRequest, context: { params: Record<string, string> }) {
+export async function GET(req: NextRequest, context: { params: { slug: string } }) {
   await connectDB();
-  const { slug } = context.params; // get the slug from the URL params
+  const { slug } = context.params; // extract slug from the context
 
   console.log(`Fetching blog with slug: ${slug}`);
 
   try {
-    const blog = await blogSchema.findOne({ slug }).orFail(); // search by slug
+    const blog = await blogSchema.findOne({ slug }).orFail(); // fetch blog by slug
     return NextResponse.json(blog);  
   } catch (err) {
     console.error("Error fetching blog:", err);
@@ -18,8 +17,7 @@ export async function GET(req: NextRequest, context: { params: Record<string, st
   }
 }
 
-// POST method to add a comment to a blog
-export async function POST(req: NextRequest, context: { params: Record<string, string> }) {
+export async function POST(req: NextRequest, context: { params: { slug: string } }) {
   await connectDB();
 
   const { slug } = context.params;  
