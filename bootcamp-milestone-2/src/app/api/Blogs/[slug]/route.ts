@@ -2,21 +2,15 @@ import { NextRequest, NextResponse } from 'next/server';
 import connectDB from "@/database/db";
 import blogSchema from "@/database/blogSchema";
 
-type IParams = {
-  params: {
-    slug: string;
-  };
-};
-
-// GET method to fetch a blog by slug
-export async function GET(req: NextRequest, { params }: IParams) {
+// gET method to fetch a blog by slug
+export async function GET(req: NextRequest, context: { params: { slug: string } }) {
   await connectDB();
-  const { slug } = params;  // Get the slug from the URL params
+  const { slug } = context.params;  // get the slug from the URL params (changed for vercel)
 
   console.log(`Fetching blog with slug: ${slug}`);
 
   try {
-    const blog = await blogSchema.findOne({ slug }).orFail(); // search for the blog by slug
+    const blog = await blogSchema.findOne({ slug }).orFail(); // search by slug
     return NextResponse.json(blog);  
   } catch (err) {
     console.error("Error fetching blog:", err);
@@ -25,10 +19,10 @@ export async function GET(req: NextRequest, { params }: IParams) {
 }
 
 // POST method to add a comment to a blog
-export async function POST(req: NextRequest, { params }: IParams) {
+export async function POST(req: NextRequest, context: { params: { slug: string } }) {
   await connectDB();
 
-  const { slug } = params;  
+  const { slug } = context.params;  
   console.log("Received slug:", slug);
 
   try {
@@ -62,4 +56,5 @@ export async function POST(req: NextRequest, { params }: IParams) {
     );
   }
 }
+
 
