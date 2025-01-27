@@ -2,10 +2,10 @@ import { NextRequest, NextResponse } from 'next/server';
 import connectDB from "@/database/db";
 import blogSchema from "@/database/blogSchema";
 
-// gET method to fetch a blog by slug
-export async function GET(req: NextRequest, context: { params: { slug: string } }) {
+// GET method to fetch a blog by slug
+export async function GET(req: NextRequest, context: { params: Record<string, string> }) {
   await connectDB();
-  const { slug } = context.params;  // get the slug from the URL params (changed for vercel)
+  const { slug } = context.params; // get the slug from the URL params
 
   console.log(`Fetching blog with slug: ${slug}`);
 
@@ -19,7 +19,7 @@ export async function GET(req: NextRequest, context: { params: { slug: string } 
 }
 
 // POST method to add a comment to a blog
-export async function POST(req: NextRequest, context: { params: { slug: string } }) {
+export async function POST(req: NextRequest, context: { params: Record<string, string> }) {
   await connectDB();
 
   const { slug } = context.params;  
@@ -56,5 +56,6 @@ export async function POST(req: NextRequest, context: { params: { slug: string }
     );
   }
 }
+
 
 
