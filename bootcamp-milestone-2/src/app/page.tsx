@@ -1,7 +1,7 @@
 import styles from "./page.module.css";
-import BlogPreview from '@/components/blogPreview'; // BlogPreview component
-import connectDB from '@/database/db'; // Database connection
-import Blog from '@/database/blogSchema'; // Blog model
+import BlogPreview from '@/components/blogPreview'; 
+import connectDB from '@/database/db'; 
+import Blog from '@/database/blogSchema'; 
 import Image from 'next/image';
 
 export default async function HomePage() {
@@ -17,7 +17,6 @@ export default async function HomePage() {
   }
 
   const blogs = await getBlogs();
-  // Format the date for each blog before passing it to BlogPreview
   const formatDate = (date: Date) => {
     return new Date(date).toLocaleDateString("en-US", {
       year: "numeric",
@@ -58,15 +57,7 @@ export default async function HomePage() {
           {blogs ? (
             blogs.map(blog => (
               <div key={blog._id} className={styles.blogPreviewContainer}>
-                <BlogPreview
-                  title={blog.title}
-                  date={formatDate(blog.date)}
-                  description={blog.description}
-                  image={blog.image}
-                  imageALT={blog.imageALT}
-                  slug={blog.slug}
-                  comments={blog.comments}
-                />
+                <BlogPreview blog={blog} />
               </div>
             ))
           ) : (
@@ -77,6 +68,7 @@ export default async function HomePage() {
     </>
   );
 }
+
 
 
 

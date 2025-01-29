@@ -1,28 +1,26 @@
 import React from 'react';
-import type { Blog } from "@/app/blogData";
+import type { BlogType } from "@/database/blogSchema"; 
 import Image from 'next/image';
 import Link from 'next/link'; 
 import style from './blogPreview.module.css';
 
-export default function BlogPreview(props: Blog) {
+interface BlogPreviewProps {
+  blog: BlogType; 
+}
+
+export default function BlogPreview({ blog }: BlogPreviewProps) {
   return (
-    <Link href={`/blog/${props.slug}`} passHref>
-      <div className={style.blogPreviewContainer}>
-        <h3 className={style.blogPreviewTitle}>{props.title}</h3>
-        <div>
-          <Image 
-            className={style.blogPreviewImage}
-            src={props.image} 
-            alt={props.imageALT || 'Blog image'} 
-            width={500} 
-            height={500} 
-          />
-          <p className={style.blogPreviewDescription}>{props.description}</p>
-          <p className={style.blogPreviewDate}>Posted on: {props.date}</p>
-        </div>
-      </div>
-    </Link>
+    <div className={style.previewContainer}>
+      <Link href={`/blog/${blog.slug}`}>
+        <h2>{blog.title}</h2>
+      </Link>
+      <p>{new Date(blog.date).toLocaleDateString()}</p>
+      <img src={blog.image} alt={blog.imageALT} width={400} height={200} />
+      <p>{blog.description}</p>
+    </div>
   );
 }
+
+
 
 
