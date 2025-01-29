@@ -53,7 +53,7 @@ export default async function Blog({ params }: Props) {
 
 async function getBlog(slug: string) { 
   try {
-    const res = await fetch(`https://bootcamp-project-2024-delta.vercel.app/blog/${slug}`, {
+    const res = await fetch(`https://bootcamp-project-2024-delta.vercel.app/api/Blogs/${slug}`, {
       cache: 'no-store',
     });
 
