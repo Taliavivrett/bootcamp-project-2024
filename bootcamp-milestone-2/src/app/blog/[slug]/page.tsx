@@ -5,11 +5,11 @@ import CommentForm from '../../../components/commentForm';
 import { IComment } from '../../blogData';
 
 type Props = {
-  params: { slug: string };
+  params: Promise<{ slug: string }>; // changed to make params a Promise
 };
 
 export default async function Blog({ params }: Props) {
-  const { slug } = await params;
+  const { slug } = await params; // changed to await
   const blog = await getBlog(slug);
 
   if (!blog) {
