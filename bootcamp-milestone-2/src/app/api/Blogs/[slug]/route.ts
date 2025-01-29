@@ -2,18 +2,12 @@ import { NextRequest, NextResponse } from 'next/server';
 import connectDB from "@/database/db";
 import blogSchema from "@/database/blogSchema";
 
-type IParams = {
-  params: {
-    slug: string;
-  };
-};
-
 // GET method to fetch a blog by slug
-export async function GET(req: NextRequest, { params }: IParams) {
+export async function GET(req: NextRequest, context: { params: Record<string, string> }) {
   await connectDB();
-  const { slug } = params;  // Get the slug from the URL params
+  const { slug } = context.params; // Get the slug from the URL params
 
-  console.log('Fetching blog with slug: ${slug}');
+  console.log(`Fetching blog with slug: ${slug}`);
 
   try {
     const blog = await blogSchema.findOne({ slug }).orFail(); // search for the blog by slug
@@ -25,10 +19,10 @@ export async function GET(req: NextRequest, { params }: IParams) {
 }
 
 // POST method to add a comment to a blog
-export async function POST(req: NextRequest, { params }: IParams) {
+export async function POST(req: NextRequest, context: { params: Record<string, string> }) {
   await connectDB();
 
-  const { slug } = params;  
+  const { slug } = context.params;  
   console.log("Received slug:", slug);
 
   try {
@@ -62,4 +56,6 @@ export async function POST(req: NextRequest, { params }: IParams) {
     );
   }
 }
+
+
 
