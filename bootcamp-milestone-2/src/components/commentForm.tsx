@@ -21,7 +21,7 @@ const CommentForm = ({ slug }: { slug: string }) => {
 
     const time = new Date().toISOString();
 
-    const baseURL = 'bootcamp-project-2024-jcycgwz97-talia-vivretts-projects.vercel.app/';
+    const baseURL = 'bootcamp-project-2024-git-main-talia-vivretts-projects.vercel.app/';
 
     try {
       const response = await fetch(`${baseURL}/api/Blogs/${slug}`, {
