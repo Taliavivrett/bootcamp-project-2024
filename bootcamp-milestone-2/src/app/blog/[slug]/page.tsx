@@ -51,6 +51,7 @@ export default async function Blog({ params }: Props) {
   );
 }
 
+
 async function getBlog(slug: string) { 
   try {
     const res = await fetch(`bootcamp-project-2024-git-main-talia-vivretts-projects.vercel.app/api/Blogs/${slug}`, {
